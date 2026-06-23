@@ -47,7 +47,7 @@ function ExternalTrafficLink({ lat, lon }: TrafficMapProps) {
       href={`https://www.google.com/maps/@${lat},${lon},13z/data=!5m1!1e1`}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 rounded-lg bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-200 transition hover:bg-zinc-700"
+      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-zinc-200 transition hover:bg-white/10"
     >
       Open traffic in Google Maps
       <ExternalLink className="h-4 w-4" />
@@ -61,11 +61,11 @@ export function TrafficMap({ lat, lon }: TrafficMapProps) {
 
   if (!apiKey) {
     return (
-      <div className="flex min-h-[320px] flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-zinc-700 bg-zinc-950/60 p-6 text-center">
-        <p className="max-w-md text-sm text-zinc-400">
-          Add a Google Maps API key to embed live traffic here. Set{" "}
-          <code className="text-amber-300">NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> in{" "}
-          <code className="text-amber-300">.env.local</code>.
+      <div className="flex min-h-[300px] flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6 text-center">
+        <MapPin className="h-10 w-10 text-zinc-600" />
+        <p className="max-w-md text-sm text-zinc-500">
+          The live map isn&apos;t available here right now. You can still check
+          traffic in Google Maps.
         </p>
         <ExternalTrafficLink lat={lat} lon={lon} />
       </div>
@@ -74,18 +74,22 @@ export function TrafficMap({ lat, lon }: TrafficMapProps) {
 
   if (!isVisible) {
     return (
-      <div className="flex min-h-[320px] flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-zinc-700 bg-zinc-950/60 p-6 text-center">
-        <MapPin className="h-10 w-10 text-amber-400/80" />
+      <div className="flex min-h-[300px] flex-col items-center justify-center gap-4 rounded-2xl border border-dashed border-white/10 bg-black/20 p-6 text-center">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ff6b2c]/10 ring-1 ring-[#ff6b2c]/20">
+          <MapPin className="h-7 w-7 text-[#ff8f5c]" />
+        </div>
         <div>
-          <p className="font-medium text-zinc-200">Traffic map ready</p>
-          <p className="mt-1 max-w-sm text-sm text-zinc-400">
-            Load the map only when you want to check traffic — saves API usage.
+          <p className="font-display text-lg font-bold text-white">
+            Traffic map
+          </p>
+          <p className="mt-1 max-w-sm text-sm text-zinc-500">
+            See how the roads look around you before you head out.
           </p>
         </div>
         <button
           type="button"
           onClick={() => setIsVisible(true)}
-          className="inline-flex items-center gap-2 rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-semibold text-zinc-950 transition hover:bg-amber-400"
+          className="inline-flex items-center gap-2 rounded-full bg-[#ff6b2c] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#ff6b2c]/20 transition hover:bg-[#ff7f47]"
         >
           <MapPin className="h-4 w-4" />
           Show traffic map
@@ -108,7 +112,7 @@ export function TrafficMap({ lat, lon }: TrafficMapProps) {
         </button>
       </div>
       <APIProvider apiKey={apiKey}>
-        <div className="h-[360px] overflow-hidden rounded-xl">
+        <div className="h-[320px] overflow-hidden rounded-2xl ring-1 ring-white/10">
           <TrafficMapInner lat={lat} lon={lon} />
         </div>
       </APIProvider>

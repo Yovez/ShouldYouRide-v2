@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Outfit } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
 });
 
 const geistMono = Geist_Mono({
@@ -19,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Should You Ride",
   },
   description:
-    "Weather, traffic, and ride conditions for motorcyclists — should you take the bike out today?",
+    "A small site that tells you if today's worth riding your motorcycle.",
 };
 
 export default function RootLayout({
@@ -30,10 +37,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${outfit.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100">
-        {children}
+      <body className="page-backdrop relative min-h-full flex flex-col text-zinc-100">
+        <div className="relative z-10 flex min-h-full flex-col">{children}</div>
         <SiteFooter />
       </body>
     </html>

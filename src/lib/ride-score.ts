@@ -12,7 +12,7 @@ function scoreTemperature(temp: number): { delta: number; factor: RideFactor } {
       factor: {
         label: "Temperature",
         status: "good",
-        detail: `${temp}°F — comfortable riding range`,
+        detail: `${temp}°F. Right in the sweet spot.`,
       },
     };
   }
@@ -23,7 +23,7 @@ function scoreTemperature(temp: number): { delta: number; factor: RideFactor } {
       factor: {
         label: "Temperature",
         status: "caution",
-        detail: `${temp}°F — cool; layer up and watch for cold hands`,
+        detail: `${temp}°F. A bit cool. Layer up.`,
       },
     };
   }
@@ -34,7 +34,7 @@ function scoreTemperature(temp: number): { delta: number; factor: RideFactor } {
       factor: {
         label: "Temperature",
         status: "caution",
-        detail: `${temp}°F — warm; stay hydrated and take breaks`,
+        detail: `${temp}°F. Hot. Drink water, take breaks.`,
       },
     };
   }
@@ -45,7 +45,7 @@ function scoreTemperature(temp: number): { delta: number; factor: RideFactor } {
       factor: {
         label: "Temperature",
         status: "bad",
-        detail: `${temp}°F — extreme heat increases fatigue risk`,
+        detail: `${temp}°F. Too hot to be comfortable for long.`,
       },
     };
   }
@@ -56,7 +56,7 @@ function scoreTemperature(temp: number): { delta: number; factor: RideFactor } {
       factor: {
         label: "Temperature",
         status: "caution",
-        detail: `${temp}°F — cold; full gear and shorter rides recommended`,
+        detail: `${temp}°F. Cold. Good gear, shorter ride.`,
       },
     };
   }
@@ -66,7 +66,7 @@ function scoreTemperature(temp: number): { delta: number; factor: RideFactor } {
     factor: {
       label: "Temperature",
       status: "bad",
-      detail: `${temp}°F — too cold for most riders without serious gear`,
+      detail: `${temp}°F. Too cold unless you're geared for it.`,
     },
   };
 }
@@ -82,7 +82,7 @@ function scoreRain(
       factor: {
         label: "Precipitation",
         status: "bad",
-        detail: "Severe weather in the forecast — best to wait it out",
+        detail: "Nasty weather in the area. I'd wait.",
       },
     };
   }
@@ -93,7 +93,7 @@ function scoreRain(
       factor: {
         label: "Precipitation",
         status: "bad",
-        detail: "Rain or active precipitation — traction and visibility suffer",
+        detail: "Raining now. Traction gets sketchy fast.",
       },
     };
   }
@@ -104,7 +104,7 @@ function scoreRain(
       factor: {
         label: "Rain chance",
         status: "bad",
-        detail: `${pop}% chance of rain in the next hour`,
+        detail: `${pop}% chance of rain in the next hour. Risky.`,
       },
     };
   }
@@ -115,7 +115,7 @@ function scoreRain(
       factor: {
         label: "Rain chance",
         status: "caution",
-        detail: `${pop}% chance of rain — pack rain gear`,
+        detail: `${pop}% chance of rain. Bring rain gear.`,
       },
     };
   }
@@ -125,7 +125,7 @@ function scoreRain(
     factor: {
       label: "Rain chance",
       status: "good",
-      detail: `${pop}% chance of rain — skies look cooperative`,
+      detail: `${pop}% chance of rain. Looks mostly dry.`,
     },
   };
 }
@@ -137,7 +137,7 @@ function scoreWind(speed: number): { delta: number; factor: RideFactor } {
       factor: {
         label: "Wind",
         status: "good",
-        detail: `${speed} mph — manageable crosswinds`,
+        detail: `${speed} mph. Shouldn't be a problem.`,
       },
     };
   }
@@ -148,7 +148,7 @@ function scoreWind(speed: number): { delta: number; factor: RideFactor } {
       factor: {
         label: "Wind",
         status: "caution",
-        detail: `${speed} mph — gusts can push you around; grip firm`,
+        detail: `${speed} mph. Gusts will push you around.`,
       },
     };
   }
@@ -158,7 +158,7 @@ function scoreWind(speed: number): { delta: number; factor: RideFactor } {
     factor: {
       label: "Wind",
       status: "bad",
-      detail: `${speed} mph — high winds make riding risky`,
+      detail: `${speed} mph. That's a lot of wind on a bike.`,
     },
   };
 }
@@ -172,7 +172,7 @@ function scoreFeelsLike(feelsLike: number, temp: number): { delta: number; facto
       factor: {
         label: "Feels like",
         status: "good",
-        detail: `${feelsLike}°F — close to actual temperature`,
+        detail: `${feelsLike}°F. About what you'd expect.`,
       },
     };
   }
@@ -183,7 +183,7 @@ function scoreFeelsLike(feelsLike: number, temp: number): { delta: number; facto
       factor: {
         label: "Feels like",
         status: "caution",
-        detail: `${feelsLike}°F with wind chill — colder than the thermometer`,
+        detail: `${feelsLike}°F with wind chill. Colder than it looks.`,
       },
     };
   }
@@ -194,7 +194,7 @@ function scoreFeelsLike(feelsLike: number, temp: number): { delta: number; facto
       factor: {
         label: "Feels like",
         status: "caution",
-        detail: `${feelsLike}°F — heat index makes it feel worse`,
+        detail: `${feelsLike}°F. Heat index is rough today.`,
       },
     };
   }
@@ -204,7 +204,7 @@ function scoreFeelsLike(feelsLike: number, temp: number): { delta: number; facto
     factor: {
       label: "Feels like",
       status: "caution",
-      detail: `${feelsLike}°F — wind or humidity shifting comfort`,
+      detail: `${feelsLike}°F. Wind or humidity making it feel different.`,
     },
   };
 }
@@ -213,39 +213,39 @@ function verdictFromScore(score: number): Pick<RideScore, "verdict" | "headline"
   if (score >= 85) {
     return {
       verdict: "excellent",
-      headline: "Hell yes — ride!",
-      summary: "Conditions look great. Gear up, ride smart, and enjoy the road.",
+      headline: "Yeah, go ride",
+      summary: "Conditions look solid. Gear up and have fun.",
     };
   }
 
   if (score >= 70) {
     return {
       verdict: "good",
-      headline: "Yeah, you should ride",
-      summary: "A solid day for two wheels. Keep an eye on the factors below.",
+      headline: "Good day for it",
+      summary: "Nothing scary in the numbers. Still worth a glance at the details below.",
     };
   }
 
   if (score >= 50) {
     return {
       verdict: "fair",
-      headline: "Maybe — ride with caution",
-      summary: "Rideable, but not ideal. Short trips and full gear recommended.",
+      headline: "Eh, maybe",
+      summary: "You could ride, but keep it short and don't skip the gear you'd regret leaving home.",
     };
   }
 
   if (score >= 30) {
     return {
       verdict: "poor",
-      headline: "Probably not today",
-      summary: "Conditions are working against you. Consider waiting or taking the cage.",
+      headline: "I'd skip it",
+      summary: "A few things are working against you today. The car might be the smarter call.",
     };
   }
 
   return {
     verdict: "stay-home",
-    headline: "Stay home, friend",
-    summary: "Weather says keep the bike parked. There's always another day.",
+    headline: "Stay home",
+    summary: "Weather's not on your side. There's always another weekend.",
   };
 }
 

@@ -1,23 +1,34 @@
 import { calculateWindChill } from "@/lib/wind";
+import { cn } from "@/lib/utils";
 
 const SPEEDS = [25, 35, 45, 50, 55, 60, 70, 80, 90, 100, 120] as const;
 const TEMPS = [30, 35, 40, 45, 50, 55, 60] as const;
 
+function chillTone(chill: number, baseTemp: number): string {
+  if (chill >= baseTemp - 2) return "text-zinc-400";
+  if (chill <= 20) return "chill-cold";
+  if (chill <= 32) return "chill-cool";
+  if (chill <= 45) return "chill-mild";
+  return "chill-warm";
+}
+
 export function WindChillChart() {
   return (
-    <section className="rounded-2xl border border-red-900/40 bg-zinc-900/60 p-6">
-      <h2 className="text-lg font-semibold text-zinc-100">Wind chill chart</h2>
-      <p className="mt-1 text-sm text-zinc-400">
-        Effective temperature at riding speed — useful when it&apos;s cold out
+    <section className="glass-panel rounded-3xl p-6 sm:p-7">
+      <h2 className="font-display text-2xl font-bold text-white">
+        Wind chill chart
+      </h2>
+      <p className="mt-1 text-sm text-zinc-500">
+        How cold it really feels at speed. I still use this on chilly mornings.
       </p>
 
-      <div className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[560px] text-left text-sm">
+      <div className="mt-6 overflow-x-auto rounded-2xl border border-white/5">
+        <table className="data-table w-full min-w-[560px] text-left text-sm">
           <thead>
-            <tr className="border-b border-zinc-800 text-xs uppercase tracking-wide text-zinc-500">
-              <th className="px-3 py-2 font-medium">MPH</th>
+            <tr className="border-b border-white/5 bg-black/20 text-[10px] uppercase tracking-wider text-zinc-500">
+              <th className="px-4 py-3 font-semibold">MPH</th>
               {TEMPS.map((temp) => (
-                <th key={temp} className="px-3 py-2 font-medium">
+                <th key={temp} className="px-3 py-3 font-semibold">
                   {temp}°F
                 </th>
               ))}
@@ -27,17 +38,20 @@ export function WindChillChart() {
             {SPEEDS.map((speed) => (
               <tr
                 key={speed}
-                className="border-b border-zinc-800/60 text-zinc-300 last:border-0"
+                className="border-b border-white/5 last:border-0"
               >
-                <td className="px-3 py-2.5 font-medium text-zinc-200">{speed}</td>
+                <td className="px-4 py-3 font-semibold text-zinc-300">{speed}</td>
                 {TEMPS.map((temp) => {
                   const chill = calculateWindChill(temp, speed);
                   return (
                     <td
                       key={`${speed}-${temp}`}
-                      className="px-3 py-2.5 tabular-nums"
+                      className={cn(
+                        "px-3 py-3 tabular-nums font-medium",
+                        chillTone(chill, temp),
+                      )}
                     >
-                      {chill}°F
+                      {chill}°
                     </td>
                   );
                 })}

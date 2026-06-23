@@ -24,25 +24,36 @@ interface WeatherCurrentCardProps {
 
 export function WeatherCurrentCard({ current, sunset }: WeatherCurrentCardProps) {
   return (
-    <section className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
-      <h2 className="text-lg font-semibold text-zinc-100">Current conditions</h2>
+    <section className="glass-panel h-full rounded-3xl p-6 sm:p-7">
+      <p className="text-sm text-zinc-500">Out there right now</p>
+      <h2 className="font-display mt-1 text-2xl font-bold text-white">
+        Current weather
+      </h2>
 
-      <div className="mt-4 flex items-start gap-4">
-        <WeatherIcon code={current.weatherCode} className="h-12 w-12 text-amber-300" />
+      <div className="mt-6 flex items-start gap-5">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#ff6b2c]/10 ring-1 ring-[#ff6b2c]/20">
+          <WeatherIcon code={current.weatherCode} className="h-9 w-9 text-[#ff8f5c]" />
+        </div>
         <div>
-          <p className="text-xl capitalize text-zinc-200">
+          <p className="text-lg capitalize text-zinc-300">
             {current.weatherDescription}
           </p>
-          <p className={cn("mt-1 text-4xl font-bold tabular-nums", tempTone(current.temperature))}>
-            {current.temperature}°F
+          <p
+            className={cn(
+              "font-display mt-1 text-5xl font-extrabold tabular-nums tracking-tight",
+              tempTone(current.temperature),
+            )}
+          >
+            {current.temperature}°
+            <span className="text-2xl font-bold text-zinc-500">F</span>
           </p>
-          <p className="text-sm text-zinc-400">
+          <p className="mt-1 text-sm text-zinc-500">
             Feels like {current.feelsLike}°F
           </p>
         </div>
       </div>
 
-      <dl className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <dl className="mt-8 grid grid-cols-2 gap-3">
         <Stat
           icon={<Droplets className="h-4 w-4" />}
           label="Humidity"
@@ -78,12 +89,12 @@ function Stat({
   value: string;
 }) {
   return (
-    <div className="rounded-xl border border-zinc-800/80 bg-zinc-950/40 px-3 py-3">
-      <dt className="flex items-center gap-1.5 text-xs uppercase tracking-wide text-zinc-500">
+    <div className="rounded-2xl border border-white/5 bg-black/20 px-4 py-3.5">
+      <dt className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
         {icon}
         {label}
       </dt>
-      <dd className="mt-1 text-sm font-medium text-zinc-200">{value}</dd>
+      <dd className="mt-1.5 text-sm font-semibold text-zinc-200">{value}</dd>
     </div>
   );
 }
