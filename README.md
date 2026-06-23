@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ShouldYouRide v2
 
-## Getting Started
+A motorcycle-focused dashboard that answers one question: **should you ride today?**
 
-First, run the development server:
+[github.com/Yovez/ShouldYouRide-v2](https://github.com/Yovez/ShouldYouRide-v2)
+
+Weather, hourly forecast, wind chill, traffic, and a ride score — all in one place.
+
+## Features
+
+- **Ride score** — weighted verdict from temperature, rain, wind, and feels-like
+- **Current weather** — conditions, humidity, wind, precipitation, sunset
+- **12-hour forecast** — hourly outlook for planning your ride window
+- **Wind chill chart** — NWS formula at common riding speeds
+- **Traffic map** — Google Maps traffic layer on demand (optional API key)
+- **Geolocation** — one tap to check conditions where you are
+
+## Stack
+
+- [Next.js](https://nextjs.org/) (App Router, React 19)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Open-Meteo](https://open-meteo.com/) — free weather, no API key required
+- [@vis.gl/react-google-maps](https://visgl.github.io/react-google-maps/) — traffic overlay (optional)
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Traffic map (optional)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Create a [Google Cloud](https://console.cloud.google.com/) project
+2. Enable **Maps JavaScript API**
+3. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`
 
-## Learn More
+Without a key, the ride page links out to Google Maps traffic instead. The embedded map loads only when you click **Show traffic map**, which helps keep API usage down.
 
-To learn more about Next.js, take a look at the following resources:
+## API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`GET /api/weather?lat=40.7&lon=-74.0` — JSON ride conditions for coordinates.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+| Command       | Description          |
+| ------------- | -------------------- |
+| `npm run dev` | Development server   |
+| `npm run build` | Production build   |
+| `npm start`   | Run production build |
+| `npm run lint` | ESLint              |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Private project.
