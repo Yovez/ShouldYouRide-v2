@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Route } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { RideVerdictPanel } from "@/components/RideVerdictPanel";
 import { WeatherCurrentCard } from "@/components/WeatherCurrentCard";
@@ -105,6 +105,14 @@ export default async function RidePage({ searchParams }: RidePageProps) {
 
         <HourlyForecastTable hourly={conditions.hourly} />
         <WindChillChart />
+
+        <Link
+          href={`/route?lat=${conditions.lat}&lon=${conditions.lon}`}
+          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-zinc-300 transition hover:bg-white/10"
+        >
+          <Route className="h-4 w-4" />
+          Suggest a random route from here
+        </Link>
       </main>
     </>
   );

@@ -29,6 +29,12 @@ export function SiteHeader() {
             Home
           </Link>
           <Link
+            href="/route"
+            className="rounded-full px-4 py-2 text-zinc-400 transition hover:bg-white/5 hover:text-white"
+          >
+            Random route
+          </Link>
+          <Link
             href="/about"
             className="rounded-full px-4 py-2 text-zinc-400 transition hover:bg-white/5 hover:text-white"
           >
