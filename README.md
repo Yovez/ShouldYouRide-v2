@@ -1,57 +1,70 @@
 # ShouldYouRide v2
 
-A motorcycle-focused dashboard that answers one question: **should you ride today?**
+I got tired of checking four apps every morning. I ride whenever I can, and before I head out I want a straight answer on whether the weather is worth it. Not a full forecast. Not math in my head.
 
-[github.com/Yovez/ShouldYouRide-v2](https://github.com/Yovez/ShouldYouRide-v2)
+That's what this is. One page that asks **should you ride today?** Weather, the next 12 hours, wind chill at highway speed, traffic if you want it, and a ride score that rolls it together.
 
-Weather, hourly forecast, wind chill, traffic, and a ride score — all in one place.
+This is a rewrite of [the original ShouldYouRide](https://github.com/Yovez/ShouldYouRide-v1) (Node, Express, Pug). Same idea, cleaner build.
 
-## Features
+**Repo:** [github.com/Yovez/ShouldYouRide-v2](https://github.com/Yovez/ShouldYouRide-v2)
 
-- **Ride score** — weighted verdict from temperature, rain, wind, and feels-like
-- **Current weather** — conditions, humidity, wind, precipitation, sunset
-- **12-hour forecast** — hourly outlook for planning your ride window
-- **Wind chill chart** — NWS formula at common riding speeds
-- **Traffic map** — Google Maps traffic layer on demand (optional API key)
-- **Geolocation** — one tap to check conditions where you are
+## What it does
 
-## Stack
+- **Ride score:** temp, rain, wind, and feels-like in one verdict so you don't have to guess
+- **Current weather:** what's happening right now where you are
+- **12-hour forecast:** for when it looks fine at 9am but storms roll in by lunch
+- **Wind chill chart:** 45° standing still is not 45° at 70 mph
+- **Traffic map:** optional. Loads only when you ask, which saves API calls
+- **Random route:** pick a distance or ride time, get a loop or one-way route, open it in Google Maps
+- **Your location:** tap once and check conditions at your spot
 
-- [Next.js](https://nextjs.org/) (App Router, React 19)
+## Built with
+
+- [Next.js](https://nextjs.org/) (App Router)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [Open-Meteo](https://open-meteo.com/) — free weather, no API key required
-- [@vis.gl/react-google-maps](https://visgl.github.io/react-google-maps/) — traffic overlay (optional)
+- [Open-Meteo](https://open-meteo.com/) for weather. Free, no key needed
+- [Google Maps](https://visgl.github.io/react-google-maps/) for traffic and routes. Optional key
 
-## Getting started
+## Run it locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Then open [http://localhost:3000](http://localhost:3000).
 
-### Traffic map (optional)
+### Google Maps (optional)
 
-1. Create a [Google Cloud](https://console.cloud.google.com/) project
-2. Enable **Maps JavaScript API**
-3. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY`
+Most of the app works without this. You only need a key for the embedded traffic map or the random route planner.
 
-Without a key, the ride page links out to Google Maps traffic instead. The embedded map loads only when you click **Show traffic map**, which helps keep API usage down.
+1. Create a project in [Google Cloud](https://console.cloud.google.com/)
+2. Enable **Maps JavaScript API** and **Directions API**
+3. Copy `.env.example` to `.env.local` and add your key:
 
-## API
+```env
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_key_here
+```
 
-`GET /api/weather?lat=40.7&lon=-74.0` — JSON ride conditions for coordinates.
+No key? The ride page still links out to Google Maps for traffic. The embedded map only loads when you hit **Show traffic map**. That's on purpose. I'm not trying to burn API quota on every page load.
+
+## Weather API
+
+```
+GET /api/weather?lat=40.7&lon=-74.0
+```
+
+Returns JSON with ride conditions for those coordinates.
 
 ## Scripts
 
-| Command       | Description          |
-| ------------- | -------------------- |
-| `npm run dev` | Development server   |
-| `npm run build` | Production build   |
-| `npm start`   | Run production build |
-| `npm run lint` | ESLint              |
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Local dev server |
+| `npm run build` | Production build |
+| `npm start` | Run the production build |
+| `npm run lint` | ESLint |
 
 ## License
 
-Private project.
+Licensed under [Apache 2.0](LICENSE). Use it, fork it, whatever. Just keep the license notice if you redistribute it.
