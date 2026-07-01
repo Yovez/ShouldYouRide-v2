@@ -6,8 +6,6 @@ That's what this is. One page that asks **should you ride today?** Weather, the 
 
 This is a rewrite of [the original ShouldYouRide](https://github.com/Yovez/ShouldYouRide-v1) (Node, Express, Pug). Same idea, cleaner build.
 
-**Repo:** [github.com/Yovez/ShouldYouRide-v2](https://github.com/Yovez/ShouldYouRide-v2)
-
 ## What it does
 
 - **Ride score:** temp, rain, wind, and feels-like in one verdict so you don't have to guess
