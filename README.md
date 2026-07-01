@@ -12,7 +12,7 @@ This is a rewrite of [the original ShouldYouRide](https://github.com/Yovez/Shoul
 - **Current weather:** what's happening right now where you are
 - **12-hour forecast:** for when it looks fine at 9am but storms roll in by lunch
 - **Wind chill chart:** 45° standing still is not 45° at 70 mph
-- **Traffic map:** optional. Loads only when you ask, which saves API calls
+- **Traffic map:** optional.
 - **Random route:** pick a distance or ride time, get a loop or one-way route, open it in Google Maps
 - **Your location:** tap once and check conditions at your spot
 
@@ -44,7 +44,7 @@ Most of the app works without this. You only need a key for the embedded traffic
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_key_here
 ```
 
-No key? The ride page still links out to Google Maps for traffic. The embedded map only loads when you hit **Show traffic map**. That's on purpose. I'm not trying to burn API quota on every page load.
+No key? The ride page still links out to Google Maps for traffic. The embedded map only loads when you hit **Show traffic map**.
 
 ## Weather API
 
